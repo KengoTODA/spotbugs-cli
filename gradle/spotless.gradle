@@ -1,0 +1,12 @@
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+    java {
+        googleJavaFormat()
+        licenseHeader '/* Copyright (C) $YEAR Kengo TODA */'
+    }
+    groovyGradle {
+        target '*.gradle'
+        greclipse()
+    }
+}

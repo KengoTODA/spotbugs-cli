@@ -1,0 +1,17 @@
+apply plugin: 'net.ltgt.errorprone'
+
+ext {
+    errorproneVersion = '2.4.0'
+    nullawayVersion = '0.8.0'
+}
+dependencies {
+    errorprone "com.google.errorprone:error_prone_core:$errorproneVersion"
+    errorprone "com.uber.nullaway:nullaway:$nullawayVersion"
+}
+tasks.withType(JavaCompile).configureEach {
+    options.errorprone {
+      disableWarningsInGeneratedCode = true
+      error 'NullAway'
+      option 'NullAway:AnnotatedPackages', 'jp.skypencil.spotbugs.cli'
+    }
+}
