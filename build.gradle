@@ -3,7 +3,7 @@ plugins {
 	id 'jacoco'
 	id 'application'
 	id 'com.diffplug.spotless' version '5.11.0' apply false
-	id 'net.ltgt.errorprone' version '2.0.0' apply false
+	id 'net.ltgt.errorprone' version '2.0.1' apply false
 }
 
 apply from: 'gradle/errorprone.gradle'
