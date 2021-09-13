@@ -14,7 +14,7 @@ repositories {
 }
 
 ext {
-	jupiterVersion = '5.7.2'
+	jupiterVersion = '5.8.0'
 	picocliVersion = '4.6.1'
 }
 
