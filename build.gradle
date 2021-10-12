@@ -21,7 +21,7 @@ ext {
 dependencies {
 	annotationProcessor "info.picocli:picocli-codegen:${picocliVersion}"
 
-	implementation 'com.github.spotbugs:spotbugs:4.4.1'
+	implementation 'com.github.spotbugs:spotbugs:4.4.2'
 	implementation "info.picocli:picocli:${picocliVersion}"
 
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
