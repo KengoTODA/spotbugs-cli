@@ -1,13 +1,8 @@
 plugins {
-	id 'java'
 	id 'jacoco'
 	id 'application'
-	id 'com.diffplug.spotless' version '5.17.1' apply false
-	id 'net.ltgt.errorprone' version '2.0.2' apply false
+	id 'local-conventions'
 }
-
-apply from: 'gradle/errorprone.gradle'
-apply from: 'gradle/spotless.gradle'
 
 repositories {
 	mavenCentral()
@@ -26,18 +21,6 @@ dependencies {
 
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
-}
-
-java {
-	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
-	}
-}
-
-compileJava {
-	options.compilerArgs += [
-		"-Aproject=${project.group}/${project.name}"
-	]
 }
 
 application {
