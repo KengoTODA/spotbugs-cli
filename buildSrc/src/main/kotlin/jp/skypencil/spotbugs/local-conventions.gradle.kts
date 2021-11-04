@@ -3,6 +3,7 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 
 plugins {
     java
+    jacoco
     id("com.diffplug.spotless")
     id("net.ltgt.errorprone")
 }
@@ -35,6 +36,11 @@ tasks.withType<JavaCompile>().configureEach {
     }
 }
 
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
 spotless {
     java {
         googleJavaFormat()
@@ -43,9 +49,6 @@ spotless {
     kotlin {
         ktlint()
         licenseHeader("/* Copyright (C) \$YEAR Kengo TODA */")
-    }
-    groovyGradle {
-        greclipse()
     }
     kotlinGradle {
         ktlint()
