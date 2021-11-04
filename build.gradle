@@ -10,7 +10,7 @@ apply from: 'gradle/errorprone.gradle'
 apply from: 'gradle/spotless.gradle'
 
 repositories {
-	jcenter()
+	mavenCentral()
 }
 
 ext {
@@ -26,6 +26,12 @@ dependencies {
 
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+}
+
+java {
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(17))
+	}
 }
 
 compileJava {

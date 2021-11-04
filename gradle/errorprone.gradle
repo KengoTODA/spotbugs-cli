@@ -1,8 +1,8 @@
 apply plugin: 'net.ltgt.errorprone'
 
 ext {
-    errorproneVersion = '2.4.0'
-    nullawayVersion = '0.8.0'
+    errorproneVersion = '2.9.0'
+    nullawayVersion = '0.9.2'
 }
 dependencies {
     errorprone "com.google.errorprone:error_prone_core:$errorproneVersion"
