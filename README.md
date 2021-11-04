@@ -20,4 +20,4 @@ build/libs/target-to-analyse.jar
 
 ## Copyright
 
-&copy; 2020-2021 Kengo TODA
+Copyright &copy; 2020-2021 Kengo TODA
