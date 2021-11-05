@@ -78,9 +78,9 @@ class App : Callable<Int> {
         return 0
     }
 
-    companion object{
+    companion object {
         @JvmStatic
-        fun main(args: Array<String>){
+        fun main(args: Array<String>) {
             exitProcess(CommandLine(App()).execute(*args))
         }
     }
