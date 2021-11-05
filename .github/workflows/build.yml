@@ -16,6 +16,7 @@ jobs:
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build --no-daemon
+          ./gradlew run --args='--help'
       - uses: actions/upload-artifact@v2
         if: always()
         with:
