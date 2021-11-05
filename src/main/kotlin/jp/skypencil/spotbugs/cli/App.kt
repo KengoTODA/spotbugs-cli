@@ -74,8 +74,7 @@ class App : Callable<Int> {
     lateinit var target: List<Path>
 
     override fun call(): Int {
-        val
-        plugins.stream().forEach(System.out::println)
+        println(plugins.joinToString(","))
         return 0
     }
 
