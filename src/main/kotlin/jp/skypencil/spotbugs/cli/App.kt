@@ -11,7 +11,7 @@ import kotlin.system.exitProcess
 
 // TODO https://github.com/remkop/picocli/blob/master/picocli-examples/src/main/java/picocli/examples/VersionProviderDemo2.java
 @Command(
-    name = "Unofficial SpotBugs CLI", version = ["experimental"],
+    name = "spotbugs", version = ["experimental"],
     mixinStandardHelpOptions = true, // add --help and --version options
     description = ["An experimental CLI for SpotBugs"]
 )
