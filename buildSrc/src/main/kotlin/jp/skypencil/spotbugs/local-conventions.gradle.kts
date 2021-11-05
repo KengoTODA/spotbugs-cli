@@ -1,38 +1,25 @@
-import net.ltgt.gradle.errorprone.errorprone
-import net.ltgt.gradle.errorprone.CheckSeverity
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 plugins {
-    java
-    jacoco
+    `jacoco`
     id("com.diffplug.spotless")
-    id("net.ltgt.errorprone")
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.9.0")
-    errorprone("com.uber.nullaway:nullaway:0.9.2")
+kotlin {
+    jvmToolchain {
+        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of("17"))
+    }
 }
 
-java {
-	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
-	}
-}
-
-tasks.compileJava {
-	options.compilerArgs.add("-Aproject=${project.group}/${project.name}")
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(17)
-    options.errorprone {
-      disableWarningsInGeneratedCode.set(true)
-      check("NullAway", CheckSeverity.ERROR)
-      option("NullAway:AnnotatedPackages", "jp.skypencil.spotbugs.cli")
+tasks.withType<KotlinJvmCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
@@ -42,10 +29,6 @@ tasks.test {
 }
 
 spotless {
-    java {
-        googleJavaFormat()
-        licenseHeader("/* Copyright (C) \$YEAR Kengo TODA */")
-    }
     kotlin {
         ktlint()
         licenseHeader("/* Copyright (C) \$YEAR Kengo TODA */")
