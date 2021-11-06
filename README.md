@@ -13,11 +13,11 @@ An experimental CLI for SpotBugs based on picocli. It is expected to solve two p
 --exclude spotbugs-exclude.xml
 --baseline spotbugs-baseline.xml
 --plugin path/to/sbcontrib.jar
---xml build/reports/spotbugs/main.sarif
---html build/reports/spotbugs/main.sarif
+--xml build/reports/spotbugs/main.xml
+--html build/reports/spotbugs/main.html
 --sarif build/reports/spotbugs/main.sarif
---xdocs build/reports/spotbugs/main.sarif
---emacs build/reports/spotbugs/main.sarif
+--xdocs build/reports/spotbugs/main.xdocs
+--emacs build/reports/spotbugs/main.emacs
 build/libs/target-to-analyse.jar
 ```
 
