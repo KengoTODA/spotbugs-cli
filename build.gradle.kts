@@ -1,6 +1,9 @@
+
+
 plugins {
     `application`
     `local-conventions`
+    id("org.mikeneck.graalvm-native-image") version "1.4.1"
 }
 
 val picocliVersion: String = "4.6.2"
@@ -27,6 +30,26 @@ kapt {
 
 application {
     mainClass.set("jp.skypencil.spotbugs.cli.App")
+}
+
+nativeImage {
+    graalVmHome = System.getenv("JAVA_HOME")
+    buildType { build ->
+        build.executable(main = "jp.skypencil.spotbugs.cli.App")
+    }
+    executableName = "spotbugs"
+    outputDirectory = file("$buildDir/executable")
+    arguments(
+        "--no-fallback"
+    )
+}
+
+generateNativeImageConfig {
+    enabled = true
+    byRunningApplicationWithoutArguments()
+    byRunningApplication {
+        arguments("-h")
+    }
 }
 
 defaultTasks("spotlessApply", "build")

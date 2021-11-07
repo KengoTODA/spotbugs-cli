@@ -8,17 +8,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - uses: ayltai/setup-graalvm@v1
         with:
           java-version: 11
-          distribution: zulu
-          cache: gradle
+          graalvm-version: 21.3.0
+          native-image: true
       - run: |
-          ./gradlew spotlessCheck build --no-daemon
-          ./gradlew run --args='--help'
+          ./gradlew spotlessCheck build nativeImage --no-daemon
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: reports
           path: build/reports
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: executables
+          path: build/executables
