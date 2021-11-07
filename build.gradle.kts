@@ -34,6 +34,7 @@ application {
 
 nativeImage {
     graalVmHome = System.getenv("JAVA_HOME")
+    mainClass = "jp.skypencil.spotbugs.cli.App"
     buildType { build ->
         build.executable(main = "jp.skypencil.spotbugs.cli.App")
     }
