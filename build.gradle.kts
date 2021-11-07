@@ -3,21 +3,20 @@ plugins {
     `local-conventions`
 }
 
-val jupiterVersion: String = "5.8.1"
-val picocliVersion: String = "4.6.1"
+val picocliVersion: String = "4.6.2"
 
 group = "jp.skypencil.spotbugs"
 
 dependencies {
     kapt("info.picocli:picocli-codegen:$picocliVersion")
 
-    api("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("org.jetbrains.kotlin:kotlin-script-runtime")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.github.spotbugs:spotbugs:4.4.2")
     implementation("info.picocli:picocli:$picocliVersion")
+    implementation("org.slf4j:slf4j-simple:1.8.0-beta4")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$jupiterVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jupiterVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 }
 
 kapt {

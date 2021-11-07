@@ -31,6 +31,7 @@ tasks.test {
 spotless {
     kotlin {
         ktlint()
+        ktfmt()
         licenseHeader("/* Copyright (C) \$YEAR Kengo TODA */")
     }
     kotlinGradle {

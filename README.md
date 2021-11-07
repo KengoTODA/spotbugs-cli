@@ -18,6 +18,7 @@ An experimental CLI for SpotBugs based on picocli. It is expected to solve two p
 --sarif build/reports/spotbugs/main.sarif
 --xdocs build/reports/spotbugs/main.xdocs
 --emacs build/reports/spotbugs/main.emacs
+--aux path/to/dependencies/*.jar
 build/libs/target-to-analyse.jar
 ```
 
