@@ -1,5 +1,3 @@
-
-
 plugins {
     `application`
     `local-conventions`
@@ -41,7 +39,8 @@ nativeImage {
     executableName = "spotbugs"
     outputDirectory = file("$buildDir/executable")
     arguments(
-        "--no-fallback"
+        "--no-fallback",
+        "-H:+AllowIncompleteClasspath"
     )
 }
 
