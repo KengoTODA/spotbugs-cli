@@ -5,8 +5,18 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: spotbugs-cli
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: spotbugs-cli
+      - uses: actions/checkout@v2
+        with:
+          repository: KengoTODA/spotbugs
+          path: spotbugs
+          ref: graalvm
       - uses: gradle/wrapper-validation-action@v1
       - uses: ayltai/setup-graalvm@v1
         with:
