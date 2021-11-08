@@ -13,7 +13,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.github.spotbugs:spotbugs:4.4.2")
     implementation("info.picocli:picocli:$picocliVersion")
-    implementation("org.slf4j:slf4j-simple:1.8.0-beta4")
+    implementation("org.slf4j:slf4j-simple:2.0.0-alpha5")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
