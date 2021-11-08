@@ -14,10 +14,7 @@ jobs:
           graalvm-version: 21.1.0
           native-image: true
       - run: |
-          ./gradlew spotlessCheck build --no-daemon
-          ls $JAVA_HOME/lib
-          ls build/libs
-          ./gradlew nativeImage --no-daemon
+          ./gradlew spotlessCheck build nativeImage --no-daemon
       - uses: actions/upload-artifact@v2
         if: always()
         with:
