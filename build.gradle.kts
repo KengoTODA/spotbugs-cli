@@ -47,9 +47,11 @@ nativeImage {
 
 generateNativeImageConfig {
     enabled = true
-    byRunningApplicationWithoutArguments()
     byRunningApplication {
-        arguments("-h")
+        arguments("--help")
+    }
+    byRunningApplication {
+        arguments("--aux", "${System.getenv("JAVA_HOME")}/lib/jrt-fs.jar", "$buildDir/libs/spotbugs-cli.jar")
     }
 }
 
