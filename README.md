@@ -12,7 +12,6 @@ An experimental CLI for SpotBugs based on picocli. It is expected to solve two p
 --include spotbugs-include.xml
 --exclude spotbugs-exclude.xml
 --baseline spotbugs-baseline.xml
---plugin path/to/sbcontrib.jar
 --xml build/reports/spotbugs/main.xml
 --html build/reports/spotbugs/main.html
 --sarif build/reports/spotbugs/main.sarif

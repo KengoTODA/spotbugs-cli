@@ -9,7 +9,6 @@ import edu.umd.cs.findbugs.EmacsBugReporter
 import edu.umd.cs.findbugs.ExitCodes
 import edu.umd.cs.findbugs.FindBugs2
 import edu.umd.cs.findbugs.HTMLBugReporter
-import edu.umd.cs.findbugs.Plugin
 import edu.umd.cs.findbugs.PrintingBugReporter
 import edu.umd.cs.findbugs.Priorities
 import edu.umd.cs.findbugs.Project
@@ -46,9 +45,6 @@ class App : Callable<Int> {
 
   @Option(names = ["--baseline"], description = ["file path of baseline file"])
   private var baseline: List<Path> = listOf()
-
-  @Option(names = ["--plugin"], description = ["file path of plugin"])
-  private var plugins: List<Path> = listOf()
 
   @Option(names = ["--xml"], description = ["file path of XML file to generate"])
   private var xmlReport: Path? = null
@@ -157,10 +153,6 @@ class App : Callable<Int> {
 
   private fun createProject(): Project {
     val project = Project()
-    plugins.forEach {
-      val pluginId: String? = Plugin.addCustomPlugin(it.toUri())?.pluginId
-      project.setPluginStatusTrinary(pluginId, true)
-    }
     auxClasspathes.forEach { project.addAuxClasspathEntry(it.toAbsolutePath().toString()) }
     target.forEach { project.addFile(it.toAbsolutePath().toString()) }
 
