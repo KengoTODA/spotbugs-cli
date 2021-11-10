@@ -1,16 +1,28 @@
 /* Copyright (C) 2021 Kengo TODA */
 package jp.skypencil.spotbugs.cli
 
-import edu.umd.cs.findbugs.BugCollectionBugReporter
 import edu.umd.cs.findbugs.BugRanker
+import edu.umd.cs.findbugs.BugReportDispatcher
+import edu.umd.cs.findbugs.ConfigurableBugReporter
 import edu.umd.cs.findbugs.DetectorFactoryCollection
+import edu.umd.cs.findbugs.EmacsBugReporter
 import edu.umd.cs.findbugs.ExitCodes
 import edu.umd.cs.findbugs.FindBugs2
+import edu.umd.cs.findbugs.HTMLBugReporter
 import edu.umd.cs.findbugs.Plugin
+import edu.umd.cs.findbugs.PrintingBugReporter
 import edu.umd.cs.findbugs.Priorities
 import edu.umd.cs.findbugs.Project
+import edu.umd.cs.findbugs.TextUIBugReporter
+import edu.umd.cs.findbugs.XDocsBugReporter
+import edu.umd.cs.findbugs.XMLBugReporter
 import edu.umd.cs.findbugs.config.UserPreferences
+import edu.umd.cs.findbugs.sarif.SarifBugReporter
+import java.io.PrintWriter
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.StandardOpenOption
 import java.util.concurrent.Callable
 import kotlin.system.exitProcess
 import picocli.CommandLine
@@ -69,10 +81,11 @@ class App : Callable<Int> {
         engine.project = it
         engine.bugReporter = bugReporter
         engine.userPreferences = createUserPreferences()
+        engine.setScanNestedArchives(true)
 
         engine.execute()
 
-        if (bugReporter.queuedErrors.isNotEmpty()) {
+        if (engine.errorCount > 0) {
           bugReporter.reportQueuedErrors()
           throw AssertionError("Analysis failed with exception. Check stderr for detail.")
         }
@@ -81,9 +94,56 @@ class App : Callable<Int> {
     }
   }
 
-  private fun createBugReporter(it: Project): BugCollectionBugReporter {
-    val bugReporter = BugCollectionBugReporter(it)
-    // TODO support BugReportDispatcher
+  private fun createBugReporter(project: Project): ConfigurableBugReporter {
+    val reporters = mutableListOf<TextUIBugReporter>()
+    xmlReport?.let {
+      val xmlBugReporter = XMLBugReporter(project)
+      xmlBugReporter.setAddMessages(true)
+      xmlBugReporter.setMinimalXML(false)
+      xmlBugReporter.setWriter(
+          PrintWriter(
+              Files.newBufferedWriter(
+                  it, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.CREATE)))
+      reporters.add(xmlBugReporter)
+    }
+    htmlReport?.let {
+      val htmlBugReporter = HTMLBugReporter(project, "default.xsl")
+      htmlBugReporter.setWriter(
+          PrintWriter(
+              Files.newBufferedWriter(
+                  it, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.CREATE)))
+      reporters.add(htmlBugReporter)
+    }
+    sarifReport?.let {
+      val sarifBugReporter = SarifBugReporter(project)
+      sarifBugReporter.setWriter(
+          PrintWriter(
+              Files.newBufferedWriter(
+                  it, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.CREATE)))
+      reporters.add(sarifBugReporter)
+    }
+    emacsReport?.let {
+      val emacsBugReporter = EmacsBugReporter()
+      emacsBugReporter.setWriter(
+          PrintWriter(
+              Files.newBufferedWriter(
+                  it, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.CREATE)))
+      reporters.add(emacsBugReporter)
+    }
+    xdocsReport?.let {
+      val xDocsBugReporter = XDocsBugReporter(project)
+      xDocsBugReporter.setWriter(
+          PrintWriter(
+              Files.newBufferedWriter(
+                  it, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.CREATE)))
+      reporters.add(xDocsBugReporter)
+    }
+    val bugReporter =
+        when (reporters.size) {
+          0 -> PrintingBugReporter()
+          1 -> reporters[0]
+          else -> BugReportDispatcher(reporters)
+        }
     bugReporter.setPriorityThreshold(Priorities.LOW_PRIORITY)
     bugReporter.setRankThreshold(BugRanker.VISIBLE_RANK_MAX)
     return bugReporter

@@ -41,6 +41,7 @@ kapt {
     arguments {
         arg("project", "${project.group}/${project.name}")
     }
+    includeCompileClasspath = false
 }
 
 application {
