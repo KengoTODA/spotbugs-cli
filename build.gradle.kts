@@ -37,6 +37,18 @@ tasks.compileKotlin {
     dependsOn(unzipSpotBugs)
 }
 
+val copyXmlFiles = tasks.register<Copy>("copyXmlFiles") {
+    dependsOn(gradle.includedBuild("spotbugs").task(":spotbugs:processResources"))
+    from("../spotbugs/spotbugs/build/resources/main") {
+        include("findbugs.xml", "messages.xml", "messages_fr.xml", "messages_ja.xml", "default.xsl")
+    }
+    into(sourceSets["main"].output.resourcesDir!!)
+}
+
+tasks.classes {
+    dependsOn(copyXmlFiles)
+}
+
 kapt {
     arguments {
         arg("project", "${project.group}/${project.name}")
@@ -58,7 +70,12 @@ nativeImage {
     outputDirectory = file("$buildDir/executable")
     arguments(
         "--no-fallback",
-        "-H:+AllowIncompleteClasspath"
+        "-H:+AllowIncompleteClasspath",
+        "-H:IncludeResources=findbugs\\.xml$",
+        "-H:IncludeResources=messages.*\\.xml$",
+        "-H:DefaultLocale=en",
+        "-H:IncludeLocales=ja",
+        "-H:IncludeResourceBundles=de.tobject.findbugs.messages,edu.umd.cs.findbugs.FindBugsAnnotationDescriptions",
     )
 }
 
