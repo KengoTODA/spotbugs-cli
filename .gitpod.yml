@@ -5,9 +5,7 @@ tasks:
       microdnf install git
     init: |
       cd /workspace
-      git clone https://github.com/KengoTODA/spotbugs.git
-      cd /workspace/spotbugs
-      git checkout graalvm
+      git clone --branch graalvm https://github.com/KengoTODA/spotbugs.git
       cd /workspace/spotbugs-cli
       ./gradlew build nativeImage
 
@@ -16,3 +14,4 @@ vscode:
     - redhat.java
     - vscjava.vscode-java-dependency
     - vscjava.vscode-java-debug
+    - mathiasfrohlich.kotlin
