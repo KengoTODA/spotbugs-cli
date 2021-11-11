@@ -1,0 +1,10 @@
+image: ghcr.io/graalvm/graalvm-ce:java11-21.1.0
+
+tasks:
+  - init: ./gradlew build nativeImage
+
+vscode:
+  extensions:
+    - redhat.java
+    - vscjava.vscode-java-dependency
+    - vscjava.vscode-java-debug
