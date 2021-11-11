@@ -1,8 +1,15 @@
 image: ghcr.io/graalvm/graalvm-ce:java11-21.1.0
 
 tasks:
-  - before: cd /workspace && git clone https://github.com/KengoTODA/spotbugs.git && cd /workspace/spotbugs && git checkout graalvm
-    init: cd /workspace/spotbugs-cli && ./gradlew build nativeImage
+  - before: |
+      microdnf install git
+    init: |
+      cd /workspace
+      git clone https://github.com/KengoTODA/spotbugs.git
+      cd /workspace/spotbugs
+      git checkout graalvm
+      cd /workspace/spotbugs-cli
+      ./gradlew build nativeImage
 
 vscode:
   extensions:
