@@ -1,4 +1,8 @@
 # Experimental spotbugs-cli
+
+[![Build](https://github.com/KengoTODA/spotbugs-cli/actions/workflows/build.yml/badge.svg)](https://github.com/KengoTODA/spotbugs-cli/actions/workflows/build.yml)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/KengoTODA/spotbugs-cli)
+
 An experimental CLI for SpotBugs based on picocli. It is expected to solve two problems:
 
 1. Make command line arguments and options following the [Command Line Interface Guidelines](https://clig.dev/).
