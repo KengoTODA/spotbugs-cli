@@ -8,10 +8,10 @@ tasks:
       cd /workspace
       git clone --branch graalvm https://github.com/KengoTODA/spotbugs.git
       cd /workspace/spotbugs-cli
+      export JAVA_HOME=/usr/bin/graalvm
       ./gradlew build nativeImage
     env:
       GRAALVM_VERSION: "21.1.0"
-      JAVA_HOME: "/usr/bin/graalvm"
 
 vscode:
   extensions:
