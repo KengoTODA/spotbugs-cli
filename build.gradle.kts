@@ -73,6 +73,7 @@ nativeImage {
         "-H:DefaultLocale=en",
         "-H:IncludeLocales=ja",
         "-H:IncludeResourceBundles=de.tobject.findbugs.messages,edu.umd.cs.findbugs.FindBugsAnnotationDescriptions",
+        "-H:+ReportExceptionStackTraces",
     )
 }
 
