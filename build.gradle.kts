@@ -18,9 +18,6 @@ dependencies {
         }
     )
     implementation("info.picocli:picocli:$picocliVersion")
-    implementation("org.slf4j:slf4j-simple:1.8.0-beta4") {
-        isTransitive = false
-    }
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
