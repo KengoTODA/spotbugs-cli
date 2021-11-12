@@ -34,6 +34,7 @@ build/executable/spotbugs \
 --sarif build/reports/spotbugs/main.sarif
 --xdocs build/reports/spotbugs/main.xdocs
 --emacs build/reports/spotbugs/main.emacs
+--detector OverridingMethodsMustInvokeSuperDetector
 --aux path/to/dependencies/*.jar
 build/libs/target-to-analyse.jar
 ```

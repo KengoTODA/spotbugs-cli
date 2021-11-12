@@ -61,6 +61,9 @@ class App : Callable<Int> {
   @Option(names = ["--xdocs"], description = ["file path of xdoc XML file to generate"])
   private var xdocsReport: Path? = null
 
+  @Option(names = ["--detector"], description = ["run only named visitors"])
+  private var detector: List<String> = listOf()
+
   @Option(names = ["--aux"], description = ["Class and libraries to use as aux classpath"])
   // TODO support patterns like "*.jar"
   private var auxClasspathes: List<Path> = listOf()
@@ -147,7 +150,11 @@ class App : Callable<Int> {
 
   private fun createUserPreferences(): UserPreferences {
     val preferences: UserPreferences = UserPreferences.createDefaultUserPreferences()
-    preferences.enableAllDetectors(true)
+    preferences.enableAllDetectors(detector.isEmpty())
+    detector.forEach {
+      val factory = DetectorFactoryCollection.instance().getFactory(it) ?: throw IllegalArgumentException("Unknown detector: " + it)
+      preferences.enableDetector(factory, true)
+    }
     return preferences
   }
 
