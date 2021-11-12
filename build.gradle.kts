@@ -5,6 +5,7 @@ plugins {
 }
 
 val picocliVersion: String = "4.6.2"
+val spotbugsVersion = "4.5.1-SNAPSHOT"
 
 group = "jp.skypencil.spotbugs"
 
@@ -13,7 +14,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(
-        fileTree("$buildDir/spotbugs/spotbugs-4.4.3-SNAPSHOT/lib").matching {
+        fileTree("$buildDir/spotbugs/spotbugs-$spotbugsVersion/lib").matching {
             include("*.jar")
         }
     )
@@ -26,7 +27,7 @@ dependencies {
 val unzipSpotBugs = tasks.register<Copy>("unzipSpotBugs") {
     dependsOn(gradle.includedBuild("spotbugs").task(":spotbugs:assemble"))
 
-    from(zipTree(file("../spotbugs/spotbugs/build/distributions/spotbugs-4.4.3-SNAPSHOT.zip")))
+    from(zipTree(file("../spotbugs/spotbugs/build/distributions/spotbugs-$spotbugsVersion.zip")))
     into("$buildDir/spotbugs")
 }
 
