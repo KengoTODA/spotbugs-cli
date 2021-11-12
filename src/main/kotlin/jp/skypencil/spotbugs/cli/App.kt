@@ -152,7 +152,9 @@ class App : Callable<Int> {
     val preferences: UserPreferences = UserPreferences.createDefaultUserPreferences()
     preferences.enableAllDetectors(detector.isEmpty())
     detector.forEach {
-      val factory = DetectorFactoryCollection.instance().getFactory(it) ?: throw IllegalArgumentException("Unknown detector: " + it)
+      val factory =
+          DetectorFactoryCollection.instance().getFactory(it)
+              ?: throw IllegalArgumentException("Unknown detector: " + it)
       preferences.enableDetector(factory, true)
     }
     return preferences
