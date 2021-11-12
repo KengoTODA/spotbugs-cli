@@ -9,6 +9,18 @@ An experimental CLI for SpotBugs based on picocli. It is expected to solve two p
 1. Make command line arguments and options following the [Command Line Interface Guidelines](https://clig.dev/).
 2. Build native binaries with [Picocli on GraalVM](https://picocli.info/picocli-on-graalvm.html).
 
+## How to run the native image
+
+```shell
+export JAVA_HOME=path/to/graalvm-21.1.0
+export JAVA8_HOME=path/to/jdk8
+./gradlew nativeImage
+build/executable/spotbugs \
+  -Djava.home=$JAVA8_HOME \
+  --aux $JAVA8_HOME/jre/lib/rt.jar \
+  build/libs/spotbugs-cli-1.0.0-SNAPSHOT.jar
+```
+
 ## WIP: Command line option and argument
 
 ```
