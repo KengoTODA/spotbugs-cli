@@ -68,6 +68,7 @@ nativeImage {
     arguments(
         "--no-fallback",
         "-H:+AllowIncompleteClasspath",
+        "-H:+AllowJRTFileSystem",
         "-H:IncludeResources=findbugs\\.xml$",
         "-H:IncludeResources=messages.*\\.xml$",
         "-H:DefaultLocale=en",
