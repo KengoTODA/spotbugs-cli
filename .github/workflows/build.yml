@@ -17,6 +17,11 @@ jobs:
           repository: KengoTODA/spotbugs
           path: spotbugs
           ref: graalvm
+      - uses: actions/checkout@v2
+        with:
+          repository: KengoTODA/graalvm-native-image-plugin
+          path: graalvm-native-image-plugin
+          ref: main
       - uses: gradle/wrapper-validation-action@v1
       - uses: ayltai/setup-graalvm@v1
         with:

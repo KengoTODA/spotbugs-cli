@@ -1,2 +1,7 @@
+// https://docs.gradle.org/7.3/userguide/composite_builds.html#included_plugin_builds
+pluginManagement {
+    includeBuild '../graalvm-native-image-plugin'
+}
+
 rootProject.name = 'spotbugs-cli'
 includeBuild '../spotbugs'
