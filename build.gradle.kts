@@ -1,7 +1,7 @@
 plugins {
     `application`
     `local-conventions`
-    id("org.mikeneck.graalvm-native-image") version "snapshot"
+    id("org.mikeneck.graalvm-native-image") version "1.4.1"
 }
 
 val picocliVersion: String = "4.6.2"
