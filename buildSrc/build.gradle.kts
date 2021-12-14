@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     implementation("com.diffplug.spotless:spotless-plugin-gradle:6.0.4")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
 }
 
 spotless {
