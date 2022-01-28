@@ -12,7 +12,7 @@ An experimental CLI for SpotBugs based on picocli. It is expected to solve two p
 ## How to run the native image
 
 ```shell
-export JAVA_HOME=path/to/graalvm-21.1.0
+export JAVA_HOME=path/to/graalvm-22.0.0.2
 export JAVA8_HOME=path/to/jdk8
 ./gradlew nativeImage
 build/executable/spotbugs \
@@ -41,4 +41,4 @@ build/libs/target-to-analyse.jar
 
 ## Copyright
 
-Copyright &copy; 2020-2021 Kengo TODA
+Copyright &copy; 2020-2022 Kengo TODA
