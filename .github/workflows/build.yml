@@ -9,15 +9,15 @@ jobs:
       run:
         working-directory: spotbugs-cli
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           path: spotbugs-cli
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: KengoTODA/spotbugs
           path: spotbugs
           ref: graalvm
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: KengoTODA/graalvm-native-image-plugin
           path: graalvm-native-image-plugin
@@ -30,12 +30,12 @@ jobs:
           native-image: true
       - run: |
           ./gradlew spotlessCheck build nativeImage --no-daemon
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: reports
           path: build/reports
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: executables
